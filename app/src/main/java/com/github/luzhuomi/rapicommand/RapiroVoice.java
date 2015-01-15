@@ -1,7 +1,9 @@
 package com.github.luzhuomi.rapicommand;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.ActivityNotFoundException;
@@ -14,9 +16,10 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.net.URLEncoder;
 
 
 public class RapiroVoice extends Activity {
@@ -81,7 +84,20 @@ public class RapiroVoice extends Activity {
                     txtSpeechInput.setText(result.get(0));
                     String text = result.get(0);
 
-                    new APITask().execute(text);
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                    String apiAddressPref = sharedPref.getString(SettingsActivity.KEY_PREF_API_ADDRESS, "192.168.2.4");
+                    String apiPortPref = sharedPref.getString(SettingsActivity.KEY_PREF_API_PORT, "8080");
+                    String encodedText = "";
+                    try {
+                        encodedText = URLEncoder.encode(text,"UTF-8");
+                    }
+                    catch (UnsupportedEncodingException e) {
+                        encodedText = text;
+                        Log.d("WARN", "UTF-8 encoding not supported.");
+                    }
+                    String url = "http://"+apiAddressPref+":"+apiPortPref+"/cmd/"+encodedText;
+;
+                    new APITask().execute(url);
                 }
                 break;
             }

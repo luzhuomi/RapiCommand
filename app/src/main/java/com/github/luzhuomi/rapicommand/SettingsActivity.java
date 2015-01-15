@@ -41,6 +41,9 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+    public static final String KEY_PREF_API_ADDRESS = "api_address";
+    public static final String KEY_PREF_API_PORT = "api_port";
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
