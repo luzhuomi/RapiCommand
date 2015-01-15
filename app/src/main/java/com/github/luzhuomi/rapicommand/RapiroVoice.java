@@ -12,11 +12,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.util.Log;
+
+
 import java.util.ArrayList;
 import java.util.Locale;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 
 public class RapiroVoice extends Activity {
@@ -80,19 +80,8 @@ public class RapiroVoice extends Activity {
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     txtSpeechInput.setText(result.get(0));
                     String text = result.get(0);
-                    String RAPIRO_URL = "http://192.168.43.9:8080/cmd/";
 
-                    try {
-
-                        URL moodserverAPI = new URL(RAPIRO_URL + text);
-
-                        BufferedReader in = new BufferedReader(new InputStreamReader(moodserverAPI.openStream()));
-
-                        String response = in.readLine();
-                    }
-                    catch (java.io.IOException e) {
-
-                    }
+                    new APITask().execute(text);
                 }
                 break;
             }
@@ -105,5 +94,19 @@ public class RapiroVoice extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_rapiro_voice, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Log.d("INFO", "settings is clicked.");
+                Intent settingsIntent = new Intent(this,SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
