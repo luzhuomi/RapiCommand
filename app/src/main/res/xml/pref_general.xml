@@ -18,15 +18,16 @@
         android:singleLine="true"
         android:maxLines="1" />
 
-
+    <!-- disabled by kenny
     <CheckBoxPreference
         android:key="example_checkbox"
         android:title="@string/pref_title_social_recommendations"
         android:summary="@string/pref_description_social_recommendations"
         android:defaultValue="true" />
-
+    -->
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <!-- disabled by kenny
     <EditTextPreference
         android:key="example_text"
         android:title="@string/pref_title_display_name"
@@ -36,10 +37,11 @@
         android:capitalize="words"
         android:singleLine="true"
         android:maxLines="1" />
-
+    -->
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <!-- disabled by kenny
     <ListPreference
         android:key="example_list"
         android:title="@string/pref_title_add_friends_to_messages"
@@ -48,5 +50,5 @@
         android:entryValues="@array/pref_example_list_values"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
-
+    -->
 </PreferenceScreen>
